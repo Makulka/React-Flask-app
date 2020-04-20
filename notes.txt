@@ -1,0 +1,90 @@
+npx --ignore-existing create-react-app react-flask-app
+
+https://blog.miguelgrinberg.com/post/how-to-create-a-react--flask-project
+
+Flask imports the application from the place indicated by the FLASK_APP environment variable.
+set in .flaskenv file
+Flask automatically imports into the environment on startup if it finds the python-dotenv package installed
+FLASK_ENV=development
+    enables Flask's debug mode
+    -> run project with flask run from the api folder
+
+react app runs on port 3000 -> use proxy in package.json file to run it at 5000
+
+add "start-api": "cd api && venv/bin/flask run --no-debugger", to scripts in package.json to run the flask sever
+    used the virtual environment path for the flask command
+    don't need to have the virtual environment activated. 
+    The nice thing about running the command in this way is 
+        that in the context of the Flask process all imports will work in the same way as with an activated virtual environment
+    -no-debugger option
+        Flask backend is strictly an API server, 
+        we will never be serving complete pages, 
+        having the browser-based debugger enabled serves no purpose, 
+        as it's just going to mess up the JSON responses that the API returns
+
+make react git repository python friendly
+    to .gitignore add  venv and __pycache__
+    $ git add .gitignore package.json api
+    $ git commit -m "flask backend"
+
+to run it need two terminals from frontend
+    npm start
+    npm run-script start-api
+    
+Running a Flask Application as a Service with Systemd
+https://blog.miguelgrinberg.com/post/running-a-flask-application-as-a-service-with-systemd
+
+https://medium.com/nmc-techblog/wait-youre-not-using-react-strictmode-a9713927a33b
+    strict mode
+
+https://www.freecodecamp.org/news/an-introduction-to-the-redux-first-routing-model-98926ebf53cb/
+redux-first-router
+window.location
+    stores url information
+window.history
+    stores a stack of locations visited by the current browser tab
+    history API offers methods like back() and forward()
+moves location to the store
+    by keeping a copy of the location data in the store
+The location is held in the Redux store.
+The location is changed by dispatching Redux actions.
+The application reads location data solely from the store.
+The store and browser history are kept in sync behind the scenes.
+process
+    navigation -> 
+    responding to navigation = app passes the new location to the router ->
+    routing = new location matched to its corresponding page content
+        router handles this  ->
+    rendering
+action -> middleware -> reducer -> new state -> rendering
+router subscribed to the store
+navigation via redux actions
+updates handled by middleware
+actions
+    5 navigation actions
+
+https://github.com/bfillmer/redux-routing-and-more/blob/master/src/state/store.js
+
+files to modify to add a route
+    1) add view file
+    2) routes.js to add path: [ROUTE_NOSTRO]: '/nostros'
+    3) types.js: export const ROUTE_NOSTRO = 'route/ROUTE_NOSTRO'
+    4) add to routesMap in Routes.js: link the route to a view
+
+https://thoughtbot.com/blog/good-things-come-to-those-who-await
+const response = await fetch('/api/time');
+    returns a Response object
+const data = await response.json();
+    decodes the JSON body of the response
+
+https://dev.to/j0nimost/setting-up-pep8-and-pylint-on-vs-code-34h
+    how to set pylint for vs code
+    wrong line: "python.pythonPath": "/usr/bin/python3.6",
+
+__all__ in __init__.py
+    It's a list of public objects of that module, as interpreted by import *. 
+    It overrides the default of hiding everything that begins with an underscore.
+    if all is defined, then only the names explicitly listed will be exported
+
+https://stackoverflow.com/questions/29872867/using-flask-migrate-with-flask-script-and-application-factory
+https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database
