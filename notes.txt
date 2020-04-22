@@ -88,3 +88,6 @@ __all__ in __init__.py
 
 https://stackoverflow.com/questions/29872867/using-flask-migrate-with-flask-script-and-application-factory
 https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database
+
+#https://pythonise.com/series/learning-flask/flask-query-strings
+#https://www.youtube.com/watch?v=qYeWemghBxI
